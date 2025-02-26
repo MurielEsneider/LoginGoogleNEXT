@@ -43,9 +43,7 @@ export default function Login() {
 
   return (
     <div className="h-screen flex flex-col items-center justify-center transform -translate-y-20">
-      {/* Contenedor para el logo con borde difuminado */}
       <div className="relative mb-8 flex items-center justify-center">
-        {/* Capa difuminada para el borde */}
         <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-white via-gray-200 to-white opacity-20 blur-sm"></div>
         {/* Contenedor del logo */}
         <div className="relative bg-white bg-opacity-5 rounded-full p-1 backdrop-blur-sm shadow-md">
@@ -57,7 +55,7 @@ export default function Login() {
         </div>
       </div>
 
-      {/* Contenedor del formulario */}
+      {/*formulario*/}
       <div className="bg-black bg-opacity-40 p-8 rounded-lg shadow-lg w-96 text-center">
         <h1 className="text-2xl font-bold mb-6 text-white">
           {isNewUser ? "Regístrate" : "Inicia sesión"}

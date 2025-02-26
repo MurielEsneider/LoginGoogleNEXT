@@ -3,27 +3,27 @@ import { useFavorites } from "../../context/FavoritesContext";
 import Link from "next/link";
 import { 
   Heart,
-  Home,      // Ícono de casa
+  Home,      
   Bookmark,
   Flag,
   Bell,
   LogOut,
-  PlusSquare,  // Para "Publicar propiedad"
-  List,        // Para "Propiedades publicadas"
-  CreditCard,  // Para "Pagos"
-  User         // Para "Volver a ser usuario"
+  PlusSquare,  
+  List,        
+  CreditCard,  
+  User         
 } from "lucide-react";
 
 export default function Menu() {
   const menuItems = [
-    { label: "Volver a ser usuario", href: "/profile", icon: <User className="w-5 h-5" /> },
+    { label: "Volver a ser usuario", href: "/volverUsuario", icon: <User className="w-5 h-5" /> },
     { label: "Publicar propiedad", href: "/publicarPropiedad", icon: <PlusSquare className="w-5 h-5" /> },
     { label: "Propiedades publicadas", href: "/propiedadesPublicadas", icon: <List className="w-5 h-5" /> },
     { label: "Pagos", href: "/pagos", icon: <CreditCard className="w-5 h-5" /> },
     { label: "Publicaciones guardadas", href: "/favorites", icon: <Bookmark className="w-5 h-5" /> },
     { label: "Enviar reportes", href: "/reports", icon: <Flag className="w-5 h-5" /> },
     { label: "Notificaciones", href: "/notifications", icon: <Bell className="w-5 h-5" /> },
-    { label: "Inicio", href: "/home", icon: <Home className="w-5 h-5" /> },
+    { label: "Inicio", href: "/home2", icon: <Home className="w-5 h-5" /> },
     { label: "Cerrar sesión", href: "/", icon: <LogOut className="w-5 h-5" /> },
   ];
 
@@ -39,7 +39,7 @@ export default function Menu() {
 
   return (
     <div>
-      {/* Menú de opciones con íconos */}
+      {/* Menú */}
       <nav className="mt-8">
         <ul className="space-y-2">
           {menuItems.map((item, index) => (
@@ -66,14 +66,12 @@ export default function Menu() {
           <div className="grid grid-cols-1 gap-4">
             {favorites.map((fav) => (
               <div key={fav.id} className="relative bg-white/10 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
-                {/* Imagen de la habitación */}
                 <div className="relative h-32 w-full">
                   <img
                     src={fav.image}
                     alt={fav.name}
                     className="w-full h-full object-cover"
                   />
-                  {/* Botón de favoritos en la parte superior derecha */}
                   <button
                     onClick={() => toggleFavorite(fav)}
                     className="absolute top-2 right-2 p-2 rounded-full hover:bg-black/40 transition-colors duration-200"

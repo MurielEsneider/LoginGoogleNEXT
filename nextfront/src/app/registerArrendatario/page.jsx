@@ -6,11 +6,11 @@ export default function RegistroArrendatario() {
   const router = useRouter();
 
   const handleContinuar = () => {
-    router.push("/arrendatario"); // Redirige al formulario de registro
+    router.push("/arrendatario"); 
   };
 
   const handleVolver = () => {
-    router.push("/profile"); // Redirige a la página de inicio (por ejemplo)
+    router.push("/profile"); 
   };
 
   return (

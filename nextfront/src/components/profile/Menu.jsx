@@ -3,7 +3,7 @@ import { useFavorites } from "../../context/FavoritesContext";
 import Link from "next/link";
 import { 
   Heart,
-  Home, // Ícono de casa (sigue en el menú)
+  Home, 
   UserPlus,
   Bookmark,
   Flag,
@@ -60,14 +60,12 @@ export default function Menu() {
           <div className="grid grid-cols-1 gap-4">
             {favorites.map((fav) => (
               <div key={fav.id} className="relative bg-white/10 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
-                {/* Imagen de la habitación */}
                 <div className="relative h-32 w-full">
                   <img
                     src={fav.image}
                     alt={fav.name}
                     className="w-full h-full object-cover"
                   />
-                  {/* Botón de favoritos en la parte superior derecha */}
                   <button
                     onClick={() => toggleFavorite(fav)}
                     className="absolute top-2 right-2 p-2 rounded-full hover:bg-black/40 transition-colors duration-200"

@@ -29,10 +29,8 @@ export default function ReportPage() {
 
   return (
     <div className="relative min-h-screen">
-      {/* Fondo con desenfoque, z-[-1] y pointer-events-none para evitar bloqueo */}
       <div className="fixed inset-0 bg-black/10 backdrop-blur-lg z-[-1] pointer-events-none"></div>
 
-      {/* Contenedor del formulario con z-10 para estar en el frente */}
       <div className="flex items-center justify-center min-h-screen px-4 py-8 relative z-10">
         <div className="max-w-lg w-full bg-black/40 backdrop-blur-md rounded-2xl shadow-xl p-8">
           <h1 className="text-3xl font-bold text-center text-white mb-6">

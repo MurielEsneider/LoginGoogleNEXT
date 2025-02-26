@@ -1,7 +1,7 @@
 // components/Layout.js
 import { useState } from 'react';
 import Link from 'next/link';
-import { FaUser, FaSignOutAlt, FaBars } from 'react-icons/fa';
+import { FaUser, FaSignOutAlt, FaBars, FaPlus } from 'react-icons/fa';
 import '../../src/globals.css';
 
 export default function Layout({ children }) {
@@ -11,14 +11,29 @@ export default function Layout({ children }) {
     <>
       <header>
         <nav className="bg-zinc-800 bg-opacity-50 backdrop-blur-md border-b border-white/20 shadow-lg px-6 py-4 text-white flex items-center justify-between relative">
-          <Link
-            href="/profile"
-            className="flex items-center text-white font-bold hover:text-cyan-400 transition-colors"
-          >
-            <FaUser className="mr-2" />
-            Perfil
-          </Link>
+          {/* Sección izquierda: Perfil */}
+          <div className="flex items-center">
+            <Link
+              href="/arrendatario"
+              className="flex items-center text-white font-bold hover:text-cyan-400 transition-colors"
+            >
+              <FaUser className="mr-2" />
+              Perfil
+            </Link>
+          </div>
 
+          {/* Sección central: Publicar */}
+          <div className="flex-1 flex justify-center">
+            <Link
+              href="/publicar"
+              className="flex items-center text-white font-bold hover:text-cyan-400 transition-colors"
+            >
+              <FaPlus className="mr-2" />
+              Crear Publicación
+            </Link>
+          </div>
+
+          {/* Sección derecha: Menú hamburguesa */}
           <div className="relative">
             <button
               onClick={() => setMenuOpen(!menuOpen)}

@@ -20,9 +20,7 @@ export default function Reserva() {
   return (
     <Layout>
       <div className="min-h-screen flex flex-col justify-start items-center p-4 pt-12">
-        {/* Contenedor central con fondo semitransparente y efecto blur */}
         <div className="bg-black/30 backdrop-blur-md rounded-xl shadow-lg overflow-hidden w-full max-w-4xl flex flex-col md:flex-row">
-          {/* Sección de la imagen (ocupando solo la mitad) */}
           <div className="md:w-1/2">
             <img 
               src={room.image} 
@@ -30,6 +28,7 @@ export default function Reserva() {
               className="object-cover w-full h-64 md:h-full"
             />
           </div>
+          
           {/* Sección de detalles y formulario */}
           <div className="md:w-1/2 p-8 flex flex-col justify-between">
             <div>

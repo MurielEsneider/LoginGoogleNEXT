@@ -9,7 +9,6 @@ export default function FavoritesPage() {
   return (
     <div className="min-h-screen backdrop-blur-sm to-blue-900 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        {/* Encabezado con efecto neón */}
         <div className="text-center mb-12 animate-fade-in">
           <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400 mb-4">
             🌟 Tus Favoritos Guardados
@@ -19,7 +18,6 @@ export default function FavoritesPage() {
           </p>
         </div>
 
-        {/* Tarjetas con efecto vidrio */}
         <div className="bg-white/5 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border border-white/10">
           {favorites.length === 0 ? (
             <div className="text-center py-16">

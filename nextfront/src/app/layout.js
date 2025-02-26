@@ -18,7 +18,6 @@ export default function RootLayout({ children }) {
               {/* Capa oscura semitransparente */}
               <div className="fixed inset-0 bg-black/20 custom-backdrop-blur" />
               
-              {/* Contenido de la página */}
               {children}
             </main>
           </FavoritesProvider>
