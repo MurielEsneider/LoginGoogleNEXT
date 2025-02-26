@@ -3,17 +3,23 @@ import { useFavorites } from "../../context/FavoritesContext";
 import Link from "next/link";
 import { 
   Heart,
-  Home, // Ícono de casa (sigue en el menú)
-  UserPlus,
+  Home,      // Ícono de casa
   Bookmark,
   Flag,
   Bell,
   LogOut,
+  PlusSquare,  // Para "Publicar propiedad"
+  List,        // Para "Propiedades publicadas"
+  CreditCard,  // Para "Pagos"
+  User         // Para "Volver a ser usuario"
 } from "lucide-react";
 
 export default function Menu() {
   const menuItems = [
-    { label: "Registrarse como arrendatario", href: "/registerArrendatario", icon: <UserPlus className="w-5 h-5" /> },
+    { label: "Volver a ser usuario", href: "/profile", icon: <User className="w-5 h-5" /> },
+    { label: "Publicar propiedad", href: "/publicarPropiedad", icon: <PlusSquare className="w-5 h-5" /> },
+    { label: "Propiedades publicadas", href: "/propiedadesPublicadas", icon: <List className="w-5 h-5" /> },
+    { label: "Pagos", href: "/pagos", icon: <CreditCard className="w-5 h-5" /> },
     { label: "Publicaciones guardadas", href: "/favorites", icon: <Bookmark className="w-5 h-5" /> },
     { label: "Enviar reportes", href: "/reports", icon: <Flag className="w-5 h-5" /> },
     { label: "Notificaciones", href: "/notifications", icon: <Bell className="w-5 h-5" /> },
@@ -40,7 +46,7 @@ export default function Menu() {
             <li key={index}>
               <a
                 href={item.href}
-                className="flex items-center px-4 py-2 text-sm text-white rounded-md hover:bg-white/30  hover:text-blue-300 transition-all duration-150 ease-in-out"
+                className="flex items-center px-4 py-2 text-sm text-white rounded-md hover:bg-white/30 hover:text-blue-300 transition-all duration-150 ease-in-out"
               >
                 <span className="mr-3">{item.icon}</span>
                 {item.label}

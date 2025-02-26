@@ -1,4 +1,4 @@
-// pages/home/index.js
+"use client";
 import Layout from '../../components/Layout';
 import RoomCard from '../../components/RoomCard';
 import rooms from '../../data/rooms'

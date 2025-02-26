@@ -16,3 +16,21 @@ body {
   min-height: 100vh; /* Asegura que el cuerpo ocupe al menos el 100% de la altura de la ventana */
   
 }
+
+.background-blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px); /* Ajusta la intensidad del desenfoque */
+  z-index: -1; /* Asegura que esté detrás del contenido */
+}
+
+.custom-backdrop-blur {
+  backdrop-filter: blur(2px);
+}
+
+.no-blur {
+  backdrop-filter: none !important;
+}
