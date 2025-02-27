@@ -25,7 +25,7 @@ export default function Layout({ children }) {
           {/* Sección central: Publicar */}
           <div className="flex-1 flex justify-center">
             <Link
-              href="/publicar"
+              href="/publicarPropiedad"
               className="flex items-center text-white font-bold hover:text-cyan-400 transition-colors"
             >
               <FaPlus className="mr-2" />
