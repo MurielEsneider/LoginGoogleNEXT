@@ -1,52 +1,46 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
-const Propietario = require('./propietarios');
+'use strict';
+const { Model } = require('sequelize');
 
-const Pago = sequelize.define('Pago', {
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false,
-    },
+module.exports = (sequelize, DataTypes) => {
+  class Pago extends Model {
+    static associate(models) {
+      // El pago pertenece a un usuario (quien envía el pago)
+      Pago.belongsTo(models.Usuario, { 
+        foreignKey: 'usuario_id', 
+        as: 'usuario'
+      });
+      // El pago pertenece a un propietario (quien recibe el pago)
+      Pago.belongsTo(models.Propietario, { 
+        foreignKey: 'propietario_id', 
+        as: 'propietario'
+      });
+    }
+  }
+
+  Pago.init({
     monto: {
-        type: DataTypes.DECIMAL(10,2),
-        allowNull: false,
+      type: DataTypes.DECIMAL,
+      allowNull: false
     },
-    estado: {
-        type: DataTypes.ENUM('Pendiente', 'Pagado'),
-        defaultValue: 'Pendiente',
-        allowNull: false,
+    fecha: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW
+    },
+    usuario_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     propietario_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: Propietario,
-            key: 'id',
-        },
-        onDelete: 'CASCADE',
-    },
-    fecha_pago: {
-        type: DataTypes.DATE,
-        allowNull: false,
-    },
-    createdAt: {
-        type: DataTypes.DATE,
-        defaultValue: Sequelize.NOW,
-        allowNull: false
-    },
-    updatedAt: {
-        type: DataTypes.DATE,
-        defaultValue: Sequelize.NOW,
-        allowNull: false
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
-}, {
-    tableName: 'pagos',
-    timestamps: false,
-});
+  }, {
+    sequelize,
+    modelName: 'Pago',
+    freezeTableName: true,  // Evita que Sequelize pluralice automáticamente
+    tableName: 'Pago',
+  });
 
-Propietario.hasMany(Pago, { foreignKey: 'propietario_id', as: 'pagos' });
-Pago.belongsTo(Propietario, { foreignKey: 'propietario_id', as: 'propietario' });
-
-module.exports = Pago;
+  return Pago;
+};

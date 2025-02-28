@@ -1,6 +1,5 @@
 "use client"; 
 
-import Image from "next/image";
 import { useAuth } from "../context/AuthContext";
 import Login from "../app/login";
 

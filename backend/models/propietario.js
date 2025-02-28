@@ -1,54 +1,51 @@
-const { Sequelize, DataTypes } = require('sequelize'); 
-const sequelize = require('../config/database');
-const Usuario = require('./usuarios');
+'use strict';
+const { Model } = require('sequelize');
 
-const Propietario = sequelize.define('Propietario', {
-    id:{
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    nombre:{
-        type: DataTypes.STRING(80),
-        allowNull: false,
-    },
-    apellido:{
-        type: DataTypes.STRING(80),
-        allowNull: false,
-    },
-    correo:{
-        type: DataTypes.STRING(50),
-        unique: true,
-        allowNull: false,
-    },
-    telefono:{
-        type: DataTypes.STRING(15),
-        allowNull: true,
-    },
-    admin_id:{
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references:{
-            model: Usuario,
-            key: 'id',
-        },
-        onDelete: 'CASCADE',
-    },
-    createdAt:{
-        type: DataTypes.DATE,
-        defaultValue: Sequelize.NOW,
-    },
-    updatedAt:{
-        type: DataTypes.DATE,
-        defaultValue: Sequelize.NOW,
-        onUpdate: Sequelize.NOW
+module.exports = (sequelize, DataTypes) => {
+  class Propietario extends Model {
+    static associate(models) {
+      // Un propietario puede tener muchas propiedades
+      Propietario.hasMany(models.Propiedad, { 
+        foreignKey: 'propietario_id', 
+        as: 'propiedades' 
+      });
+      // Un propietario puede tener muchos reportes
+      Propietario.hasMany(models.Reporte, { 
+        foreignKey: 'propietario_id', 
+        as: 'reportes'
+      });
+      // Un propietario puede tener muchas notificaciones
+      Propietario.hasMany(models.Notificacion, { 
+        foreignKey: 'propietario_id', 
+        as: 'notificaciones'
+      });
     }
-},{
-    tableName: 'propietarios',
-    timestamps: false,
-});
+  }
 
-Usuario.hasMany(Propietario, {foreignKey: 'admin_id', as: 'propietarios'});
-Propietario.belongsTo(Usuario, {foreignKey: 'admin_id', as: 'admin'});
+  Propietario.init({
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    nombre: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true
+      }
+    }
+  }, {
+    sequelize,
+    modelName: 'Propietario',
+    freezeTableName: true,  // Evita que Sequelize pluralice automáticamente
+    tableName: 'Propietario'
+  });
 
-module.exports = Propietario;
+  return Propietario;
+};

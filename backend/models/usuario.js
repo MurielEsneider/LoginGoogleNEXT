@@ -1,46 +1,50 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+'use strict';
+const { Model } = require('sequelize');
 
-const Usuario = sequelize.define('Usuario', {
+module.exports = (sequelize, DataTypes) => {
+  class Usuario extends Model {
+    static associate(models) {
+      // Un usuario puede tener muchas notificaciones
+      Usuario.hasMany(models.Notificacion, { 
+        foreignKey: 'usuario_id', 
+        as: 'notificaciones' 
+      });
+      // Opcional: Un usuario puede tener muchos reportes
+      Usuario.hasMany(models.Reporte, { 
+        foreignKey: 'usuario_id', 
+        as: 'reportes' 
+      });
+    }
+  }
+
+  Usuario.init({
     id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-        allowNull: false
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
     },
     nombre: {
-        type: DataTypes.STRING(80),
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false
     },
-    correo: {
-        type: DataTypes.STRING(100),
-        allowNull: false,
-        unique: true
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true
+      }
     },
-    contrasena: {
-        type: DataTypes.STRING(100),
-        allowNull: false
-    },
-    rol: {
-        type: DataTypes.ENUM('Administrador','Guardia'),
-        allowNull: false,
-    },
-    estado: {
-        type: DataTypes.ENUM('Activo','Inactivo'),
-        allowNull: false,
-    },
-    createdAt: {
-        type: DataTypes.DATE,
-        defaultValue: Sequelize.NOW
-    },
-    updatedAt: {
-        type: DataTypes.DATE,
-        defaultValue: Sequelize.NOW,
-        onUpdate: Sequelize.NOW
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
-}, {
-    tableName: 'usuarios',
-    timestamps: true
-});
+  }, {
+    sequelize,
+    modelName: 'Usuario',
+    freezeTableName: true,  // Evita que Sequelize pluralice automáticamente
+    tableName: 'Usuario'
+  });
 
-module.exports = Usuario;
+  return Usuario;
+};
