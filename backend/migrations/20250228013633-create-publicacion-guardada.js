@@ -11,25 +11,20 @@ module.exports = {
       },
       usuario_id: {
         type: Sequelize.INTEGER,
-        allowNull: true,  // Permite nulo si el guardado lo hace un arrendatario
+        allowNull: true
+      },
+      // Cambiamos la definición de propietario_id para que sea STRING
+      // y haga referencia a la columna "uid" de la tabla Propietario
+      propietario_id: {
+        type: Sequelize.STRING,
+        allowNull: true,
         references: {
-          model: 'Usuario', // La tabla de Usuarios debe existir
-          key: 'id'
+          model: 'Propietario', // Nombre de la tabla (tal como se definió en la migración de Propietario)
+          key: 'uid'            // Ahora referencia la columna "uid"
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      arrendatario_id: {
-        type: Sequelize.INTEGER,
-        allowNull: true,  // Permite nulo si el guardado lo hace un usuario
-        references: {
-          model: 'Propietario', // La tabla de Arrendatarios debe existir
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
-      },
-      // (Opcional) Si deseas guardar algún dato extra relacionado a la publicación guardada, agrégalo aquí
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

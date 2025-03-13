@@ -22,8 +22,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: true
     },
+    // Actualizamos la columna para que sea de tipo STRING
+    // Esto permitirá almacenar el UID de Firebase que es un string
     propietario_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true
     }
     // Puedes agregar otros campos si es necesario, por ejemplo: publicacion_id, fecha_guardado, etc.

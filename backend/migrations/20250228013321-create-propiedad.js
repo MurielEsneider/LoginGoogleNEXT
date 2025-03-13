@@ -33,14 +33,14 @@ module.exports = {
         defaultValue: false
       },
       propietario_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,  // Ahora es STRING para almacenar el UID
         allowNull: false,
         references: {
-          model: 'Propietario', // Asegúrate de que la tabla "Propietario" exista
-          key: 'id'
+          model: "Propietario", // Nombre de la tabla Propietario
+          key: "uid"            // Clave primaria en Propietario (UID)
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE"
       },
       createdAt: {
         allowNull: false,

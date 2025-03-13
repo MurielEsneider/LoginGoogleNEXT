@@ -31,14 +31,21 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
+    // Cambiamos propietario_id a STRING para almacenar el UID de Firebase
     propietario_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
+      references: {
+        model: 'Propietario', // La tabla Propietario
+        key: 'uid'            // La columna primaria (UID)
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE'
     }
   }, {
     sequelize,
     modelName: 'Pago',
-    freezeTableName: true,  // Evita que Sequelize pluralice automáticamente
+    freezeTableName: true,
     tableName: 'Pago',
   });
 

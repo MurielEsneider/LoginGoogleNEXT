@@ -16,6 +16,7 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
+// Leer archivos de modelos
 fs
   .readdirSync(__dirname)
   .filter(file => {
@@ -27,10 +28,13 @@ fs
     );
   })
   .forEach(file => {
+    console.log("Importando modelo:", file); // Ahora está dentro del forEach
     const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
+    console.log("Modelo cargado:", model.name); // Asegurar que se está importando bien
     db[model.name] = model;
   });
 
+// Asociaciones entre modelos
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);

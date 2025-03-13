@@ -36,8 +36,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
+    // Cambiamos el tipo a STRING para almacenar el UID de Propietario
     propietario_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false
     },
     pago_id: {

@@ -33,9 +33,10 @@ export default function Profile() {
           displayName: name,
           photoURL: profileImage,
         });
-        console.log("Perfil actualizado en Firebase Auth");
+        window.alert("Perfil actualizado exitosamente.");
       } catch (error) {
         console.error("Error actualizando el perfil:", error);
+        window.alert("Hubo un error al actualizar el perfil. Inténtalo nuevamente.");
       }
     }
   };

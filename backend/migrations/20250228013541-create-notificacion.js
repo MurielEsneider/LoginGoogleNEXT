@@ -28,14 +28,14 @@ module.exports = {
         onDelete: 'CASCADE'
       },
       propietario_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
         references: {
-          model: 'Propietario', // Debe existir la tabla Propietarios
-          key: 'id'
+          model: "Propietario", // Nombre de la tabla
+          key: "uid"            // Clave primaria del propietario
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE"
       },
       leida: {
         type: Sequelize.BOOLEAN,

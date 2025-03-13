@@ -6,12 +6,12 @@ const publicacionesController = require('../controllers/publicacionesArrendatari
 // Obtener todas las publicaciones
 router.get('/publicacion', publicacionesController.obtenerPropiedades);
 router.post('/publicacion', publicacionesController.crearPropiedad);
+router.put('/publicacion/:id', publicacionesController.editarPropiedad);
 router.delete('/publicacion/:id', publicacionesController.eliminarPropiedad);
-// Obtener una publicación por ID
-/* router.get('/ obetener/:id', publicacionesController.getPublicacionById);
+// Obtener una sola publicación por ID
+router.get('/publicacion/:id', publicacionesController.obtenerPropiedadId);
 
-// Crear una nueva publicación
-router.post('/publicar', publicacionesController.createPublicacion); */
+
 
 
 module.exports = router;

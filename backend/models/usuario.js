@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'usuario_id', 
         as: 'notificaciones' 
       });
-      // Opcional: Un usuario puede tener muchos reportes
+      // Un usuario puede tener muchos reportes
       Usuario.hasMany(models.Reporte, { 
         foreignKey: 'usuario_id', 
         as: 'reportes' 

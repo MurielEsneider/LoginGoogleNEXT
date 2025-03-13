@@ -37,12 +37,13 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE'
     },
+    // Actualizamos esta columna para que sea STRING y refiera a 'uid'
     propietario_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true, // Permitir nulo si es para un usuario
       references: {
         model: 'Propietario',
-        key: 'id'
+        key: 'uid'
       },
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE'

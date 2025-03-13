@@ -4,19 +4,13 @@ const mysql = require('mysql2');
 const chalk = require('chalk');
 const cors = require('cors');
 const sharp = require('sharp');
+const path = require('path'); // Asegúrate de importar path
 
 const publicacionesRoutes = require('./routes/publicacionesArrendatarioRoute');
 const propietarioRoutes = require('./routes/propietarioRoute');
 
 const app = express();
 app.use(express.json());
-
-// Función helper para optimizar imágenes (opcional, si la usas)
-const helperImg = (filePath, fileName, size = 300) => {
-  return sharp(filePath)
-    .resize(size)
-    .toFile(`optimize/t${fileName}.png`);
-};
 
 // Configurar CORS
 const corsOptions = {
@@ -44,17 +38,27 @@ db.connect(err => {
   }
 });
 
+// Helper para optimizar imágenes (opcional)
+const helperImg = (filePath, fileName, size = 300) => {
+  return sharp(filePath)
+    .resize(size)
+    .toFile(`optimize/t${fileName}.png`);
+};
+
+// **Agregar esta línea para servir archivos estáticos desde la carpeta "uploads"**
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 // Ruta de prueba
 app.get('/', (req, res) => {
   res.send('¡Servidor funcionando!');
 });
 
-// Rutas de publicaciones
+// Rutas de publicaciones y propietarios
 app.use('/api', publicacionesRoutes);
 app.use('/api', propietarioRoutes);
 
 // Iniciar servidor
-const PORT = process.env.PORT || 4004;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(chalk.blue.bold('🔵 Servidor corriendo en:'), `http://localhost:${PORT}`);
 });

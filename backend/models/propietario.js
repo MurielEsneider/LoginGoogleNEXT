@@ -23,10 +23,11 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   Propietario.init({
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
+    uid: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      primaryKey: true,   // Usamos el UID de Firebase como clave primaria
+      unique: true
     },
     nombre: {
       type: DataTypes.STRING,
@@ -39,6 +40,10 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isEmail: true
       }
+    },
+    fotoPerfil: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
     sequelize,

@@ -30,14 +30,14 @@ module.exports = {
         onDelete: 'CASCADE'
       },
       propietario_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
         references: {
-          model: 'Propietario', // Asegúrate de que la tabla Propietarios exista
-          key: 'id'
+          model: "Propietario", // Nombre de la tabla
+          key: "uid"            // Clave primaria del propietario
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE"
       },
       pago_id: {
         type: Sequelize.INTEGER,

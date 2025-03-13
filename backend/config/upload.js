@@ -1,11 +1,15 @@
-// config/upload.js
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 
-// Configuración de Multer
+const uploadFolder = path.join(__dirname, '../uploads');
+if (!fs.existsSync(uploadFolder)) {
+  fs.mkdirSync(uploadFolder, { recursive: true });
+}
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/'); // Directorio donde se guardarán los archivos
+    cb(null, uploadFolder);
   },
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
@@ -15,7 +19,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ 
   storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // Límite de 5MB
+  limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     if (file.mimetype.startsWith('image/')) {
       cb(null, true);
@@ -25,5 +29,4 @@ const upload = multer({
   }
 });
 
-// Exportamos el middleware listo para usar
 module.exports = upload;

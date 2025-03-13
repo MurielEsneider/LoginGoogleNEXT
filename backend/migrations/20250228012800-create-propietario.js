@@ -3,11 +3,11 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Propietario', {
-      id: {
+      uid: {
+        type: Sequelize.STRING,
         allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
+        primaryKey: true,  // El UID será la clave primaria
+        unique: true
       },
       nombre: {
         type: Sequelize.STRING,
@@ -15,7 +15,12 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
+      },
+      fotoPerfil: {
+        type: Sequelize.STRING,
+        allowNull: true
       },
       createdAt: {
         allowNull: false,
@@ -27,6 +32,7 @@ module.exports = {
       }
     });
   },
+
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Propietario');
   }
